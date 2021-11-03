@@ -177,7 +177,7 @@
     {
       "text": "%pyspark\n\n\nimport re\nimport sets, math\nimport numpy # make sure numpy is installed on all datanodes using the command pip3 install numpy\n\nfrom pyspark.sql import SQLContext\nfrom pyspark.mllib import *\nfrom pyspark.mllib.regression import LabeledPoint\nfrom pyspark.mllib.linalg import Vectors\nfrom pyspark.mllib.classification import SVMWithSGD\nfrom pyspark.mllib.evaluation import BinaryClassificationMetrics\n\nsparkSession \u003d SparkSession.builder.appName(\"SVM notebook\").getOrCreate()\nsc \u003d sparkSession.sparkContext\n\nhdfs_nn \u003d \"ip-172-31-89-172\" # TODO: change it if it differs from your machine environment\n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:50:14.959",
+      "dateUpdated": "2021-11-03 15:12:59.879",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -206,8 +206,8 @@
       "jobName": "paragraph_1605179067285_567379070",
       "id": "paragraph_1605179067285_567379070",
       "dateCreated": "2020-11-12 19:04:27.285",
-      "dateStarted": "2021-11-03 14:50:14.988",
-      "dateFinished": "2021-11-03 14:51:02.900",
+      "dateStarted": "2021-11-03 15:12:59.944",
+      "dateFinished": "2021-11-03 15:13:42.685",
       "status": "FINISHED"
     },
     {
@@ -256,7 +256,7 @@
     {
       "text": "%pyspark\ndef remove_punct(tweet):\n    return re.sub(\u0027[\\\u0027\".,!#]\u0027,\u0027\u0027,tweet)\n\nposTXT \u003d sc.textFile(\"hdfs://%s:9000/lab12/ex2/label_data/Kpop/*.txt\" % hdfs_nn).sample(False,0.1).map(remove_punct)\nnegTXT \u003d sc.textFile(\"hdfs://%s:9000/lab12/ex2/label_data/othertweet/*.txt\" % hdfs_nn).sample(False,0.1).map(remove_punct)\n\n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:55:56.153",
+      "dateUpdated": "2021-11-03 15:13:58.964",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -285,8 +285,8 @@
       "jobName": "paragraph_1605232417247_368212173",
       "id": "paragraph_1605232417247_368212173",
       "dateCreated": "2020-11-13 09:53:37.247",
-      "dateStarted": "2021-11-03 14:55:56.184",
-      "dateFinished": "2021-11-03 14:56:02.815",
+      "dateStarted": "2021-11-03 15:13:59.224",
+      "dateFinished": "2021-11-03 15:14:01.270",
       "status": "FINISHED"
     },
     {
@@ -376,9 +376,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\ndef tf(terms): \n    \u0027\u0027\u0027\n    input\n    terms :  a RDD of lists of terms (words)\n    output\n    a RDD of pairs i.e. (word, tf_score)\n    \u0027\u0027\u0027\n    # TODO\n    # return None\n    return terms.flatMap(lambda seq: map(lambda w:(w,1), seq)).reduceByKey(lambda x,y:x + y)",
+      "text": "%pyspark\ndef tf(terms): \n    \u0027\u0027\u0027\n    input\n    terms :  a RDD of lists of terms (words)\n    output\n    a RDD of pairs i.e. (word, tf_score)\n    \u0027\u0027\u0027\n    # TODO\n    # return None\n    \n    # ANSWER\n    return terms.flatMap(lambda seq: map(lambda w:(w,1), seq)).reduceByKey(lambda x,y:x + y)",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:56:07.490",
+      "dateUpdated": "2021-11-03 15:18:03.719",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -407,8 +407,8 @@
       "jobName": "paragraph_1605179483069_2099191288",
       "id": "paragraph_1605179483069_2099191288",
       "dateCreated": "2020-11-12 19:11:23.070",
-      "dateStarted": "2021-11-03 14:56:07.508",
-      "dateFinished": "2021-11-03 14:56:07.526",
+      "dateStarted": "2021-11-03 15:17:50.961",
+      "dateFinished": "2021-11-03 15:17:51.022",
       "status": "FINISHED"
     },
     {
@@ -457,7 +457,7 @@
     {
       "text": "%pyspark\n\n\ndef one_grams(s):\n    return s.split()\n\n\ntest_terms \u003d [one_grams(\"apple smart phones made by apple\"), one_grams(\"android smart phones made by others\")]\ntest_tf \u003d tf(sc.parallelize(test_terms))\ntest_tf.collect()",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:56:11.347",
+      "dateUpdated": "2021-11-03 15:18:06.216",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -494,7 +494,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ec2-18-212-36-170.compute-1.amazonaws.com:4040/jobs/job?id\u003d4"
+              "jobUrl": "http://ec2-35-173-126-167.compute-1.amazonaws.com:4040/jobs/job?id\u003d0"
             }
           ],
           "interpreterSettingId": "spark"
@@ -504,8 +504,8 @@
       "jobName": "paragraph_1605235280114_459821824",
       "id": "paragraph_1605235280114_459821824",
       "dateCreated": "2020-11-13 10:41:20.114",
-      "dateStarted": "2021-11-03 14:56:11.357",
-      "dateFinished": "2021-11-03 14:56:22.817",
+      "dateStarted": "2021-11-03 15:18:06.246",
+      "dateFinished": "2021-11-03 15:18:10.413",
       "status": "FINISHED"
     },
     {
@@ -552,9 +552,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\ndef df(terms): \n    \u0027\u0027\u0027\n    input\n    terms :  a RDD of lists of terms (words)\n    output\n    a RDD of pairs i.e. (word, df_score)\n    \u0027\u0027\u0027\n    # TODO\n    # return None\n    return terms.flatMap(lambda seq: list(set(map(lambda w:(w,1), seq)))).reduceByKey(lambda x,y:x + y)",
+      "text": "%pyspark\ndef df(terms): \n    \u0027\u0027\u0027\n    input\n    terms :  a RDD of lists of terms (words)\n    output\n    a RDD of pairs i.e. (word, df_score)\n    \u0027\u0027\u0027\n    # TODO\n    # return None\n    \n    # ANSWER\n    return terms.flatMap(lambda seq: list(set(map(lambda w:(w,1), seq)))).reduceByKey(lambda x,y:x + y)",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:51:31.387",
+      "dateUpdated": "2021-11-03 15:18:21.210",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -583,8 +583,8 @@
       "jobName": "paragraph_1605179487492_435846692",
       "id": "paragraph_1605179487492_435846692",
       "dateCreated": "2020-11-12 19:11:27.492",
-      "dateStarted": "2021-11-03 14:51:32.321",
-      "dateFinished": "2021-11-03 14:51:34.393",
+      "dateStarted": "2021-11-03 15:18:21.236",
+      "dateFinished": "2021-11-03 15:18:21.257",
       "status": "FINISHED"
     },
     {
@@ -633,7 +633,7 @@
     {
       "text": "%pyspark\ntest_terms \u003d [one_grams(\"apple smart phones made by apple\"), one_grams(\"android smart phones made by others\")]\ntest_df \u003d df(sc.parallelize(test_terms))\ntest_df.collect()",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:51:42.796",
+      "dateUpdated": "2021-11-03 15:18:26.638",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -670,7 +670,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ec2-18-212-36-170.compute-1.amazonaws.com:4040/jobs/job?id\u003d1"
+              "jobUrl": "http://ec2-35-173-126-167.compute-1.amazonaws.com:4040/jobs/job?id\u003d1"
             }
           ],
           "interpreterSettingId": "spark"
@@ -680,8 +680,8 @@
       "jobName": "paragraph_1605235477579_1943833912",
       "id": "paragraph_1605235477579_1943833912",
       "dateCreated": "2020-11-13 10:44:37.579",
-      "dateStarted": "2021-11-03 14:51:43.766",
-      "dateFinished": "2021-11-03 14:51:45.401",
+      "dateStarted": "2021-11-03 15:18:26.657",
+      "dateFinished": "2021-11-03 15:18:27.115",
       "status": "FINISHED"
     },
     {
@@ -728,9 +728,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\ndef tfidf(terms): \n    \u0027\u0027\u0027\n    input\n    terms:  a RDD of lists of terms (words)\n    output\n    a RDD of pairs i.e. (words, tfidf_score) sorted by tfidf_score in descending order.\n    \u0027\u0027\u0027\n    # TODO\n    # return None\n    dCount \u003d terms.count()\n    tfreq \u003d tf(terms)\n    dfreq \u003d df(terms)\n    return tfreq.join(dfreq).map(lambda p :(p[0], p[1][0] * math.log(dCount/p[1][1]))).sortBy( lambda p : - p[1])\n    \n",
+      "text": "%pyspark\ndef tfidf(terms): \n    \u0027\u0027\u0027\n    input\n    terms:  a RDD of lists of terms (words)\n    output\n    a RDD of pairs i.e. (words, tfidf_score) sorted by tfidf_score in descending order.\n    \u0027\u0027\u0027\n    # TODO\n    # return None\n    \n    # ANSWER\n    dCount \u003d terms.count()\n    tfreq \u003d tf(terms)\n    dfreq \u003d df(terms)\n    return tfreq.join(dfreq).map(lambda p :(p[0], p[1][0] * math.log(dCount/p[1][1]))).sortBy( lambda p : - p[1])\n    \n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:51:50.759",
+      "dateUpdated": "2021-11-03 15:18:35.543",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -759,8 +759,8 @@
       "jobName": "paragraph_1605179527860_2127881722",
       "id": "paragraph_1605179527860_2127881722",
       "dateCreated": "2020-11-12 19:12:07.860",
-      "dateStarted": "2021-11-03 14:51:50.781",
-      "dateFinished": "2021-11-03 14:51:50.799",
+      "dateStarted": "2021-11-03 15:18:35.562",
+      "dateFinished": "2021-11-03 15:18:35.585",
       "status": "FINISHED"
     },
     {
@@ -809,7 +809,7 @@
     {
       "text": "%pyspark\ntest_terms \u003d [one_grams(\"apple smart phones made by apple\"), one_grams(\"android smart phones made by others\")]\ntest_tfidf \u003d tfidf(sc.parallelize(test_terms))\ntest_tfidf.collect()",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:51:55.578",
+      "dateUpdated": "2021-11-03 15:18:39.184",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -846,10 +846,10 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ec2-18-212-36-170.compute-1.amazonaws.com:4040/jobs/job?id\u003d2"
+              "jobUrl": "http://ec2-35-173-126-167.compute-1.amazonaws.com:4040/jobs/job?id\u003d2"
             },
             {
-              "jobUrl": "http://ec2-18-212-36-170.compute-1.amazonaws.com:4040/jobs/job?id\u003d3"
+              "jobUrl": "http://ec2-35-173-126-167.compute-1.amazonaws.com:4040/jobs/job?id\u003d3"
             }
           ],
           "interpreterSettingId": "spark"
@@ -859,8 +859,8 @@
       "jobName": "paragraph_1605235636171_1140499598",
       "id": "paragraph_1605235636171_1140499598",
       "dateCreated": "2020-11-13 10:47:16.171",
-      "dateStarted": "2021-11-03 14:51:55.639",
-      "dateFinished": "2021-11-03 14:52:17.258",
+      "dateStarted": "2021-11-03 15:18:39.222",
+      "dateFinished": "2021-11-03 15:18:42.102",
       "status": "FINISHED"
     },
     {
@@ -909,7 +909,7 @@
     {
       "text": "%pyspark\n# You don\u0027t need to modify this cell\ndef buildTopTFIDF(tweets,tokenizer):\n    \u0027\u0027\u0027\n    input\n    tweets: an RDD of texts|\n    tokenizer: a function turns a string into list of tokens\n    \n    output\n    a list containing top 150 tfidf terms\n    \u0027\u0027\u0027\n    terms \u003d tweets.map(tokenizer)\n    return map(lambda p:p[0], tfidf(terms).take(150))\n    ",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:52:19.538",
+      "dateUpdated": "2021-11-03 15:18:49.615",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -940,8 +940,8 @@
       "jobName": "paragraph_1605235760088_2054597265",
       "id": "paragraph_1605235760088_2054597265",
       "dateCreated": "2020-11-13 10:49:20.088",
-      "dateStarted": "2021-11-03 14:52:19.573",
-      "dateFinished": "2021-11-03 14:52:19.736",
+      "dateStarted": "2021-11-03 15:18:49.632",
+      "dateFinished": "2021-11-03 15:18:49.654",
       "status": "FINISHED"
     },
     {
@@ -990,7 +990,7 @@
     {
       "text": "%pyspark\n\nl1 \u003d [\"a\",\"b\",\"c\"]\nl2 \u003d [1,2,3]\n\nlist(zip(l1,l2))\n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:52:39.107",
+      "dateUpdated": "2021-11-03 15:18:53.241",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -998,12 +998,12 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
+          "language": "python",
           "editOnDblClick": false,
           "completionKey": "TAB",
-          "completionSupport": false
+          "completionSupport": true
         },
-        "editorMode": "ace/mode/text"
+        "editorMode": "ace/mode/python"
       },
       "settings": {
         "params": {},
@@ -1024,14 +1024,14 @@
       "jobName": "paragraph_1606874518768_67809616",
       "id": "paragraph_1606874518768_67809616",
       "dateCreated": "2020-12-02 10:01:58.768",
-      "dateStarted": "2021-11-03 14:52:40.312",
-      "dateFinished": "2021-11-03 14:52:40.994",
+      "dateStarted": "2021-11-03 15:18:53.260",
+      "dateFinished": "2021-11-03 15:18:53.295",
       "status": "FINISHED"
     },
     {
       "text": "%pyspark\nfrom functools import reduce\n# def two_grams(str):\n#   \u0027\u0027\u0027\n#    input\n#     str : a string\n#    output\n#     a list of strings (each string contains two consecutive words seperated by space)\n#   \u0027\u0027\u0027\n#   return to_words(str) # TODO: fixme \n\n# words \u003d [\u0027hello\u0027, \u0027apple\u0027, \u0027orange\u0027]\n# words[1:] \u003d [\"apple\", \"orange\"]\n# zip(words, words[1:]) \u003d [(\"hello\", \"apple\"), (\"apple\", \"orange\")]\n\n\n# ANSWER\ndef to_ngrams(str, n):\n    words \u003d str.split()\n    tokens \u003d [words] * (n-1) # replicate the list of words for n-1 times\n    dropped \u003d map(lambda p: p[0][p[1]:], zip(tokens, range(1,n)))\n    return reduce(lambda acc,ts:map(lambda p : p[0] + \" \" + p[1], zip(acc,ts)), dropped, words)\n\ndef two_grams(str):\n    return to_ngrams(str, 2)\n    ",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:53:11.563",
+      "dateUpdated": "2021-11-03 15:18:55.632",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -1060,8 +1060,8 @@
       "jobName": "paragraph_1605239137806_1086427717",
       "id": "paragraph_1605239137806_1086427717",
       "dateCreated": "2020-11-13 11:45:37.806",
-      "dateStarted": "2021-11-03 14:53:11.583",
-      "dateFinished": "2021-11-03 14:53:11.612",
+      "dateStarted": "2021-11-03 15:18:55.647",
+      "dateFinished": "2021-11-03 15:18:55.674",
       "status": "FINISHED"
     },
     {
@@ -1110,7 +1110,7 @@
     {
       "text": "%pyspark\n\ns \u003d \"The virus that causes COVID-19 is mainly  transmitted through droplets\"\nlist(two_grams(s))\n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:53:23.553",
+      "dateUpdated": "2021-11-03 15:19:15.107",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -1144,8 +1144,8 @@
       "jobName": "paragraph_1605239392461_1348676149",
       "id": "paragraph_1605239392461_1348676149",
       "dateCreated": "2020-11-13 11:49:52.461",
-      "dateStarted": "2021-11-03 14:53:23.580",
-      "dateFinished": "2021-11-03 14:53:23.604",
+      "dateStarted": "2021-11-03 15:19:15.138",
+      "dateFinished": "2021-11-03 15:19:15.167",
       "status": "FINISHED"
     },
     {
@@ -1194,7 +1194,7 @@
     {
       "text": "%pyspark\ntopTFIDF \u003d  buildTopTFIDF(posTXT + negTXT,two_grams)",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:56:51.530",
+      "dateUpdated": "2021-11-03 15:44:57.214",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -1213,29 +1213,36 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "ERROR",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "java.lang.RuntimeException: java.io.IOException: org.apache.thrift.transport.TTransportException: java.net.SocketException: Network is unreachable (connect failed)\n\tat org.apache.zeppelin.interpreter.remote.PooledRemoteClient.callRemoteFunction(PooledRemoteClient.java:100)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:98)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:208)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:490)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:72)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:182)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: java.io.IOException: org.apache.thrift.transport.TTransportException: java.net.SocketException: Network is unreachable (connect failed)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.lambda$new$0(RemoteInterpreterProcess.java:60)\n\tat org.apache.zeppelin.interpreter.remote.RemoteClientFactory.create(RemoteClientFactory.java:54)\n\tat org.apache.zeppelin.interpreter.remote.RemoteClientFactory.create(RemoteClientFactory.java:34)\n\tat org.apache.commons.pool2.BasePooledObjectFactory.makeObject(BasePooledObjectFactory.java:60)\n\tat org.apache.commons.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:861)\n\tat org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:435)\n\tat org.apache.zeppelin.interpreter.remote.PooledRemoteClient.getClient(PooledRemoteClient.java:54)\n\tat org.apache.zeppelin.interpreter.remote.PooledRemoteClient.callRemoteFunction(PooledRemoteClient.java:92)\n\t... 14 more\nCaused by: org.apache.thrift.transport.TTransportException: java.net.SocketException: Network is unreachable (connect failed)\n\tat org.apache.thrift.transport.TSocket.open(TSocket.java:226)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.lambda$new$0(RemoteInterpreterProcess.java:58)\n\t... 21 more\nCaused by: java.net.SocketException: Network is unreachable (connect failed)\n\tat java.net.PlainSocketImpl.socketConnect(Native Method)\n\tat java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)\n\tat java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)\n\tat java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)\n\tat java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)\n\tat java.net.Socket.connect(Socket.java:607)\n\tat org.apache.thrift.transport.TSocket.open(TSocket.java:221)\n\t... 22 more\n"
-          }
-        ]
-      },
       "apps": [],
-      "runtimeInfos": {},
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ec2-35-173-126-167.compute-1.amazonaws.com:4040/jobs/job?id\u003d11"
+            },
+            {
+              "jobUrl": "http://ec2-35-173-126-167.compute-1.amazonaws.com:4040/jobs/job?id\u003d12"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1605238979633_829412602",
       "id": "paragraph_1605238979633_829412602",
       "dateCreated": "2020-11-13 11:42:59.633",
-      "dateStarted": "2021-11-03 14:56:55.033",
-      "dateFinished": "2021-11-03 14:57:38.016",
-      "status": "ERROR"
+      "dateStarted": "2021-11-03 15:44:57.226",
+      "dateFinished": "2021-11-03 15:42:05.324",
+      "status": "RUNNING"
     },
     {
-      "text": "%pyspark\ntopTFIDF \u003d  buildTopTFIDF(posTXT + negTXT,two_grams)",
+      "text": "%pyspark\n# topTFIDF \u003d  buildTopTFIDF(posTXT + negTXT,two_grams)",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:54:11.394",
+      "dateUpdated": "2021-11-03 15:21:03.955",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1264,9 +1271,9 @@
       "status": "READY"
     },
     {
-      "text": "%pyspark\ntopTFIDF",
+      "text": "%pyspark\nlist(topTFIDF)",
       "user": "anonymous",
-      "dateUpdated": "2020-11-13 11:55:31.400",
+      "dateUpdated": "2021-11-03 15:44:45.065",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -1290,7 +1297,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "[u\u0027jae millz\u0027, u\u0027jae suk\u0027, u\u0027yoo jae\u0027, u\u0027by jae\u0027, u\u0027jae lee\u0027, u\u0027jae crowder\u0027, u\u0027kim jae\u0027, u\u0027in the\u0027, u\u0027jeremiah jae\u0027, u\u0027ahn jae\u0027, u\u0027jae hyun\u0027, u\u0027i love\u0027, u\u0027and jae\u0027, u\u0027will be\u0027, u\u0027to jae\u0027, u\u0027for the\u0027, u\u0027jae wook\u0027, u\u0027jae tips\u0027, u\u0027jae i\u0027, u\u0027thanks jae\u0027, u\u0027you jae\u0027, u\u0027on the\u0027, u\u0027to see\u0027, u\u0027with jae\u0027, u\u0027of the\u0027, u\u0027had a\u0027, u\u0027thank you\u0027, u\u0027a video\u0027, u\u0027song jae\u0027, u\u0027new favorite\u0027, u\u0027to a\u0027, u\u0027jae hee\u0027, u\u0027feat jae\u0027, u\u0027i had\u0027, u\u0027all the\u0027, u\u0027millz og\u0027, u\u0027ho jae\u0027, u\u0027that jae\u0027, u\u0027running man\u0027, u\u0027i just\u0027, u\u0027jae is\u0027, u\u0027a jae\u0027, u\u0027yoon jae\u0027, u\u0027a great\u0027, u\u0027is jae\u0027, u\u0027in my\u0027, u\u0027happy bihday\u0027, u\u0027from jae\u0027, u\u0027need to\u0027, u\u0027millz troy\u0027, u\u0027millzy johnson\u0027, u\u0027i think\u0027, u\u0027jae synth\u0027, u\u0027like jae\u0027, u\u0027jae the\u0027, u\u0027jae and\u0027, u\u0027jae at\u0027, u\u0027og millzy\u0027, u\u0027by lee\u0027, u\u0027has been\u0027, u\u0027back to\u0027, u\u0027for jae\u0027, u\u0027with the\u0027, u\u0027i miss\u0027, u\u0027to the\u0027, u\u0027hyuk jae\u0027, u\u0027to get\u0027, u\u0027the new\u0027, u\u0027jae )\u0027, u\u0027jae park\u0027, u\u0027jae for\u0027, u\u0027of jae\u0027, u\u0027is the\u0027, u\u0027troy (freestyle)\u0027, u\u0027young jae\u0027, u\u0027name is\u0027, u\u0027you are\u0027, u\u0027jae joong\u0027, u\u0027jae jae\u0027, u\u0027out jae\u0027, u\u0027out to\u0027, u\u0027is in\u0027, u\u0027a new\u0027, u\u0027check out\u0027, u\u0027in a\u0027, u\u0027junjin park\u0027, u\u0027lee jong\u0027, u\u0027how i\u0027, u\u0027best friend\u0027, u\u0027no one\u0027, u\u0027travoltified name\u0027, u\u0027to be\u0027, u\u0027lmao jae\u0027, u\u0027by jeremiah\u0027, u\u0027jae on\u0027, u\u0027added a\u0027, u\u0027if jae\u0027, u\u0027i am\u0027, u\u0027but i\u0027, u\u0027liked a\u0027, u\u0027going to\u0027, u\u0027see jae\u0027, u\u0027video to\u0027, u\u0027my travoltified\u0027, u\u0027new video\u0027, u\u0027(official music\u0027, u\u0027park ji\u0027, u\u0027i added\u0027, u\u0027a few\u0027, u\u0027you gonna\u0027, u\u0027one of\u0027, u\u0027jae won\u0027, u\u0027i need\u0027, u\u0027directed by\u0027, u\u0027the best\u0027, u\u0027are the\u0027, u\u0027music video)\u0027, u\u0027of my\u0027, u\u0027is so\u0027, u\u0027music video\u0027, u\u0027he is\u0027, u\u0027for a\u0027, u\u0027i liked\u0027, u\u0027jae kim\u0027, u\u0027of a\u0027, u\u0027jae rim\u0027, u\u0027at the\u0027, u\u0027and more\u0027, u\u0027jae to\u0027, u\u0027you at\u0027, u\u0027to go\u0027, u\u0027go to\u0027, u\u0027to you\u0027, u\u0027from the\u0027, u\u0027i cant\u0027, u\u0027i can\u0027, u\u0027prod by\u0027, u\u0027a playlist\u0027, u\u0027jae by\u0027, u\u0027go jae\u0027, u\u0027with my\u0027, u\u0027with me\u0027, u\u0027lee jae\u0027, u\u0027jae from\u0027, u\u0027had to\u0027, u\u0027my new\u0027, u\u0027young money\u0027, u\u0027murda mook\u0027, u\u0027thanks for\u0027, u\u0027jong hyun\u0027]\n"
+            "data": "[]\n"
           }
         ]
       },
@@ -1300,8 +1307,8 @@
       "jobName": "paragraph_1605239727011_1423229505",
       "id": "paragraph_1605239727011_1423229505",
       "dateCreated": "2020-11-13 11:55:27.011",
-      "dateStarted": "2020-11-13 11:55:31.402",
-      "dateFinished": "2020-11-13 11:55:31.410",
+      "dateStarted": "2021-11-03 15:44:45.091",
+      "dateFinished": "2021-11-03 15:44:46.615",
       "status": "FINISHED"
     },
     {
@@ -1348,9 +1355,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\n\n\ndef computeLP(label,text,tokenizer,topTerms):\n    \u0027\u0027\u0027\n    input\n    label : label 1 or 0\n    text : the text (String type)\n    tokenizer : the tokenizer\n    topTerms: the top TFIDF terms\n    \n    output:\n    a label point.\n    \u0027\u0027\u0027\n    seqSet \u003d set(tokenizer(text))\n    scores \u003d [0.0] * 150 # TODO: fixme\n    # ANSWER\n    scores \u003d map(lambda t: 1.0 if t in seqSet else 0.0, topTerms)\n    return LabeledPoint(label, Vectors.dense(scores))",
+      "text": "%pyspark\n\n\ndef computeLP(label,text,tokenizer,topTerms):\n    \u0027\u0027\u0027\n    input\n    label : label 1 or 0\n    text : the text (String type)\n    tokenizer : the tokenizer\n    topTerms: the top TFIDF terms\n    \n    output:\n    a label point.\n    \u0027\u0027\u0027\n    seqSet \u003d set(tokenizer(text))\n    scores \u003d [0.0] * 150 # TODO: fixme\n    # ANSWER\n    scores \u003d map(lambda t: 1.0 if t in seqSet else 0.0, list(topTerms))\n    return LabeledPoint(label, Vectors.dense(scores))",
       "user": "anonymous",
-      "dateUpdated": "2020-11-13 12:01:15.413",
+      "dateUpdated": "2021-11-03 15:44:00.972",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -1381,8 +1388,8 @@
       "jobName": "paragraph_1605235720192_1443219265",
       "id": "paragraph_1605235720192_1443219265",
       "dateCreated": "2020-11-13 10:48:40.192",
-      "dateStarted": "2020-11-13 12:01:15.413",
-      "dateFinished": "2020-11-13 12:01:15.418",
+      "dateStarted": "2021-11-03 15:44:01.011",
+      "dateFinished": "2021-11-03 15:44:01.100",
       "status": "FINISHED"
     },
     {
@@ -1431,7 +1438,7 @@
     {
       "text": "%pyspark\ncomputeLP(1.0, \"I love yoo jae suk\", two_grams, topTFIDF)",
       "user": "anonymous",
-      "dateUpdated": "2020-11-13 12:03:01.007",
+      "dateUpdated": "2021-11-03 15:44:09.601",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -1451,11 +1458,11 @@
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "msg": [
           {
             "type": "TEXT",
-            "data": "LabeledPoint(1.0, [0.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])\n"
+            "data": "Fail to execute line 2: computeLP(1.0, \"I love yoo jae suk\", two_grams, topTFIDF)\nTraceback (most recent call last):\n  File \"/tmp/1635952418754-0/zeppelin_python.py\", line 158, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 2, in \u003cmodule\u003e\n  File \"\u003cstdin\u003e\", line 19, in computeLP\n  File \"/home/ec2-user/spark/python/pyspark/mllib/linalg/__init__.py\", line 914, in dense\n    return DenseVector(elements)\n  File \"/home/ec2-user/spark/python/pyspark/mllib/linalg/__init__.py\", line 283, in __init__\n    ar \u003d np.array(ar, dtype\u003dnp.float64)\nTypeError: float() argument must be a string or a number, not \u0027map\u0027\n"
           }
         ]
       },
@@ -1465,9 +1472,9 @@
       "jobName": "paragraph_1605240088165_1110133447",
       "id": "paragraph_1605240088165_1110133447",
       "dateCreated": "2020-11-13 12:01:28.165",
-      "dateStarted": "2020-11-13 12:03:01.010",
-      "dateFinished": "2020-11-13 12:03:01.020",
-      "status": "FINISHED"
+      "dateStarted": "2021-11-03 15:44:09.648",
+      "dateFinished": "2021-11-03 15:44:09.717",
+      "status": "ERROR"
     },
     {
       "text": "%md\n\n## Training the model\n\nLet\u0027s train our model. The codes are written for you, you don\u0027t need to change anything\n",
