@@ -214,9 +214,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%sh\nexport PATH\u003d$PATH:/home/ec2-user/hadoop/bin/\n\nnamenode\u003dip-172-31-89-172\n\nhdfs dfs -rm -r hdfs://$namenode:9000/lab12/ex1/input/\nhdfs dfs -mkdir -p hdfs://$namenode:9000/lab12/ex1/input/\n\nhdfs dfs -put /home/ec2-user/git/50043-labs/lab12/data/ex1/input.txt  hdfs://$namenode:9000/lab12/ex1/input/\n",
+      "text": "%sh\nexport PATH\u003d$PATH:/home/ec2-user/hadoop/bin/\n\nnamenode\u003dip-172-31-89-172 # TODO: fixme\n\nhdfs dfs -rm -r hdfs://$namenode:9000/lab12/ex1/input/\nhdfs dfs -mkdir -p hdfs://$namenode:9000/lab12/ex1/input/\n\nhdfs dfs -put /home/ec2-user/git/50043-labs/lab12/data/ex1/input.txt  hdfs://$namenode:9000/lab12/ex1/input/\n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:27:43.645",
+      "dateUpdated": "2021-11-04 01:41:28.501",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -257,7 +257,7 @@
     {
       "text": "%md\n**[CODE CHANGE REQUIRED]** \nComplete the following PySpark script so that it performs the above-mentioned transformation.\n\n\n\u003cstyle\u003e\n    div.hidecode + pre {display: none}\n\u003c/style\u003e\n\u003cscript\u003e\ndoclick\u003dfunction(e) {\n    e.nextSibling.nextSibling.style.display\u003d\"block\";\n}\n\u003c/script\u003e\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\n```text\nLet r be an RDD, r.map(f) applies f to all elements in r and return a new RDD.\nr.filter(p) fitlers out elements e from r that satisfying p(e).\nr.saveAsTextFile(\"hdfs://...\") will save an RDD into hdfs.\n```",
       "user": "anonymous",
-      "dateUpdated": "2020-11-13 15:42:24.719",
+      "dateUpdated": "2021-11-04 01:45:48.293",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -271,8 +271,8 @@
           "completionSupport": false
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true,
-        "tableHide": false
+        "editorHide": false,
+        "tableHide": true
       },
       "settings": {
         "params": {},
@@ -298,9 +298,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\nsparkSession \u003d SparkSession.builder.appName(\"Transformation notebook\").getOrCreate()\nsc \u003d sparkSession.sparkContext\n\nhdfs_nn \u003d \"ip-172-31-89-172\"\ndef join(tokenized):\n    x \u003d (tokenized[1].split(\":\"))[1] \n    y \u003d (tokenized[2].split(\":\"))[1]\n    return \"\\t\".join([x,y])\n\nsc.appName \u003d \"ETL (Transform) Example\"\n\ninput \u003d sc.textFile(\"hdfs://%s:9000/lab12/ex1/input/\" % hdfs_nn) \n\ntokenizeds \u003d input.map(lambda line : line.split(\" \")) \ntokenizeds.persist()\n\n# TODO: fix me\nones \u003d tokenizeds.filter(lambda tokenized : tokenized[0] \u003d\u003d \"1\").map(join)\nones.saveAsTextFile(\"hdfs://%s:9000/lab12/ex1/output/ones\" % hdfs_nn)\n\n# TODO: fix me\nzeros \u003d tokenizeds.filter(lambda tokenized : tokenized[0] \u003d\u003d \"0\").map(join)\nzeros.saveAsTextFile(\"hdfs://%s:9000/lab12/ex1/output/zeros\" %hdfs_nn) \n\nsc.stop()\n\n",
+      "text": "%pyspark\n\nfrom pyspark.sql import SparkSession\nsparkSession \u003d SparkSession.builder.appName(\"Transformation notebook\").getOrCreate()\nsc \u003d sparkSession.sparkContext\n\nhdfs_nn \u003d \"ip-172-31-89-172\"\ndef join(tokenized):\n    x \u003d (tokenized[1].split(\":\"))[1] \n    y \u003d (tokenized[2].split(\":\"))[1]\n    return \"\\t\".join([x,y])\n\nsc.appName \u003d \"ETL (Transform) Example\"\n\ninput \u003d sc.textFile(\"hdfs://%s:9000/lab12/ex1/input/\" % hdfs_nn) \n\ntokenizeds \u003d input.map(lambda line : line.split(\" \")) \ntokenizeds.persist()\n\nones \u003d tokenizeds.filter(lambda tokenized : tokenized[0] \u003d\u003d \"1\").map(join)\nones.saveAsTextFile(\"hdfs://%s:9000/lab12/ex1/output/ones\" % hdfs_nn)\n\nzeros \u003d None # TODO: fix me\nzeros.saveAsTextFile(\"hdfs://%s:9000/lab12/ex1/output/zeros\" %hdfs_nn) \n\nsc.stop()\n\n",
       "user": "anonymous",
-      "dateUpdated": "2021-11-03 14:18:40.771",
+      "dateUpdated": "2021-11-04 01:45:15.277",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -350,9 +350,52 @@
       "status": "FINISHED"
     },
     {
+      "text": "%md \n### Sample answer\n\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\n\n```python\n\nzeros \u003d tokenizeds.filter(lambda tokenized : tokenized[0] \u003d\u003d \"0\").map(join)\n\n```\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-04 01:45:23.486",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eSample answer\u003c/h3\u003e\n\u003cdiv class\u003d\"hidecode\" onclick\u003d\"doclick(this);\"\u003e[Show Hint]\u003c/div\u003e\n\u003cpre\u003e\u003ccode class\u003d\"language-python\"\u003e\nzeros \u003d tokenizeds.filter(lambda tokenized : tokenized[0] \u003d\u003d \u0026quot;0\u0026quot;).map(join)\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635990128269_2004029264",
+      "id": "paragraph_1635990128269_2004029264",
+      "dateCreated": "2021-11-04 01:42:08.269",
+      "dateStarted": "2021-11-04 01:45:14.311",
+      "dateFinished": "2021-11-04 01:45:18.930",
+      "status": "FINISHED"
+    },
+    {
       "text": "%md\n\n## Test case\n\nRun the fulling bash cell to check the results\n\nIt should be something like the following \n\n```text\n20/11/12 18:51:34 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n124\t253\n145\t255\n5\t63\n1\t168\n121\t254\n166\t222\n178\t255\n7\t176\n68\t45\n...\n```\n\nand \n\n```text\n124\t253\n145\t255\n5\t63\n1\t168\n121\t254\n166\t222\n178\t255\n7\t176\n68\t45\n64\t191\n...\n```\n",
       "user": "anonymous",
-      "dateUpdated": "2020-11-12 18:53:04.016",
+      "dateUpdated": "2021-11-04 01:45:39.792",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -388,8 +431,8 @@
       "jobName": "paragraph_1605149620841_1143671331",
       "id": "paragraph_1605149620841_1143671331",
       "dateCreated": "2020-11-12 10:53:40.841",
-      "dateStarted": "2020-11-12 18:53:04.016",
-      "dateFinished": "2020-11-12 18:53:04.022",
+      "dateStarted": "2021-11-04 01:45:39.799",
+      "dateFinished": "2021-11-04 01:45:39.866",
       "status": "FINISHED"
     },
     {
@@ -477,7 +520,7 @@
     {
       "text": "%md\n\n## Cleaning up\n\nModify the following bash cell to clean HDFS",
       "user": "anonymous",
-      "dateUpdated": "2020-11-13 13:43:20.663",
+      "dateUpdated": "2021-11-04 01:45:45.008",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -513,8 +556,8 @@
       "jobName": "paragraph_1605246164394_1767951865",
       "id": "paragraph_1605246164394_1767951865",
       "dateCreated": "2020-11-13 13:42:44.394",
-      "dateStarted": "2020-11-13 13:43:20.664",
-      "dateFinished": "2020-11-13 13:43:20.666",
+      "dateStarted": "2021-11-04 01:45:45.013",
+      "dateFinished": "2021-11-04 01:45:45.037",
       "status": "FINISHED"
     },
     {
